@@ -1,0 +1,55 @@
+/* Dashboard.css */
+
+.dashboard-container {
+    display: flex;
+  }
+  
+  .left-column {
+    width: auto;
+    padding: 10px;
+  }
+  
+  .button {
+    background-color: rgb(53, 190, 224);
+    color: white;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    width: 230px;
+    border-radius: 10px;
+  }
+  
+  .tbl-button {
+    background-color: rgb(53, 190, 224);
+    color: white;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    border-radius: 10px;
+  }
+
+  .right-column {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .disease-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .disease-table th {
+    border: 1px solid rgb(230, 230, 230);
+    padding: 20px 8px;
+    text-align: left;
+    outline: none;
+  }
+  .disease-table td {
+    border: 1px solid rgb(230, 230, 230);
+    padding: 4px 8px;
+    text-align: left;
+    outline: none;
+  }
+  

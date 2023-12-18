@@ -1,17 +1,33 @@
-// AddDiseaseModal.js
+// UpdateDiseaseModal.js
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 
-const AddDiseaseModal = ({ isOpen, onRequestClose, onSubmit }) => {
+const UpdateDiseaseModal = ({
+  isOpen,
+  onRequestClose,
+  onSubmit,
+  initialData,
+}) => {
   const [formData, setFormData] = useState({
     diseaseName: "",
     image: "",
     description: "",
-    symptoms: [],
-    remedy: [],
-    treatment: [],
+    symptoms: "",
+    remedy: "",
+    treatment: "",
   });
+
+  useEffect(() => {
+    setFormData({
+      diseaseName: initialData.diseaseName || "",
+      image: initialData.image || "",
+      description: initialData.description || "",
+      symptoms: initialData.symptoms?.join(',') || "",
+      remedy: initialData.remedy?.join(',') || "",
+      treatment: initialData.treatment?.join(',') || "",
+    });
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +68,7 @@ const AddDiseaseModal = ({ isOpen, onRequestClose, onSubmit }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Add Disease Modal"
+      contentLabel="Update Disease Modal"
       style={{
         content: {
           width: "400px",
@@ -65,7 +81,9 @@ const AddDiseaseModal = ({ isOpen, onRequestClose, onSubmit }) => {
         },
       }}
     >
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add Disease</h2>
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+        Update Disease
+      </h2>
       <label style={{ marginBottom: "15px" }}>
         Disease Name:
         <input
@@ -198,4 +216,4 @@ const AddDiseaseModal = ({ isOpen, onRequestClose, onSubmit }) => {
   );
 };
 
-export default AddDiseaseModal;
+export default UpdateDiseaseModal;

@@ -18,17 +18,32 @@ const DiseaseServices = {
       const response = await axios.post(`${BASE_URL}/add-disease`, data);
       return response.data;
     } catch (error) {
-      console.error('Error adding disease:', error);
+      console.error("Error adding disease:", error);
       throw error;
     }
   },
 
   deleteDisease: async (id) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/delete-disease?id=${id}`);
+      const response = await axios.delete(
+        `${BASE_URL}/delete-disease?id=${id}`
+      );
       return response.data;
     } catch (error) {
       console.error(`Error deleting disease with id of "${id}":`);
+      throw error;
+    }
+  },
+
+  updateDisease: async (id, updatedData) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/update-disease`, {
+        id,
+        ...updatedData,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error updating disease:", error);
       throw error;
     }
   },

@@ -4,12 +4,15 @@ import "./Dashboard.css";
 import DiseaseServices from "../../services/disease.services";
 import AddDiseaseModal from "../../modals/AddDiseaseModal";
 import ViewDiseaseModal from "../../modals/ViewDiseaseModal";
+import UpdateDiseaseModal from "../../modals/UpdateDiseaseModal";
 
 const Dashboard = () => {
   const [disease, setDiseases] = useState([]);
   const [isAddDiseaseModalOpen, setAddDiseaseModalOpen] = useState(false);
   const [isViewDiseaseModalOpen, setViewDiseaseModalOpen] = useState(false);
-  const [selectedDisease, setSelectedDisease] = useState('');
+  const [isUpdateDiseaseModalOpen, setIsUpdateDiseaseModalOpen] =
+    useState(false);
+  const [selectedDisease, setSelectedDisease] = useState("");
 
   const navigate = useNavigate();
 
@@ -54,8 +57,30 @@ const Dashboard = () => {
     setAddDiseaseModalOpen(true);
   };
 
+  const handleUpdateDiseaseModal = (row) => {
+    setSelectedDisease(row);
+    setIsUpdateDiseaseModalOpen(true);
+  };
+
   const handleCloseModal = () => {
     setAddDiseaseModalOpen(false);
+  };
+
+  const handleUpdateDiseaseSubmit = async (formData) => {
+    try {
+      await DiseaseServices.updateDisease(selectedDisease.id, formData)
+        .then(() => {
+          window.alert("Disease updated successfully!");
+          fetchDiseases();
+        })
+        .catch((err) => {
+          window.alert("Error", err);
+        });
+    } catch (error) {
+      console.error("Error updating disease:", error);
+    } finally {
+      setIsUpdateDiseaseModalOpen(false);
+    }
   };
 
   const handleAddDiseaseSubmit = async (formData) => {
@@ -76,10 +101,13 @@ const Dashboard = () => {
   };
 
   const handleViewDisease = (row) => {
-    setSelectedDisease(row)
-    setViewDiseaseModalOpen(true)
+    setSelectedDisease(row);
+    setViewDiseaseModalOpen(true);
   };
 
+  const closeUpdateDiseaseModal = () => {
+    setIsUpdateDiseaseModalOpen(false);
+  };
   const closeViewDiseaseModal = () => {
     setViewDiseaseModalOpen(false);
   };
@@ -123,12 +151,18 @@ const Dashboard = () => {
                   </button>
                 </td>
                 <td>
-                  <button className="tbl-button" onClick={() => handleViewDisease(row)}>
+                  <button
+                    className="tbl-button"
+                    onClick={() => handleUpdateDiseaseModal(row)}
+                  >
                     Update
                   </button>
                 </td>
                 <td>
-                  <button className="tbl-button" onClick={() => handleViewDisease(row)}>
+                  <button
+                    className="tbl-button"
+                    onClick={() => handleViewDisease(row)}
+                  >
                     View
                   </button>
                 </td>
@@ -144,10 +178,17 @@ const Dashboard = () => {
         onSubmit={handleAddDiseaseSubmit}
       />
 
-      <ViewDiseaseModal 
-      isOpen={isViewDiseaseModalOpen}
-      onRequestClose={closeViewDiseaseModal}
-      diseaseData={selectedDisease}
+      <ViewDiseaseModal
+        isOpen={isViewDiseaseModalOpen}
+        onRequestClose={closeViewDiseaseModal}
+        diseaseData={selectedDisease}
+      />
+
+      <UpdateDiseaseModal
+        isOpen={isUpdateDiseaseModalOpen}
+        initialData={selectedDisease}
+        onRequestClose={closeUpdateDiseaseModal}
+        onSubmit={handleUpdateDiseaseSubmit}
       />
     </div>
   );

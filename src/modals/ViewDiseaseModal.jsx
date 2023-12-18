@@ -28,19 +28,19 @@ const ViewDiseaseModal = ({ isOpen, onRequestClose, diseaseData }) => {
         <p>Description: {diseaseData.description}</p>
         <p style={{ fontWeight: 'bold' }}>Symptoms</p>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {diseaseData.symptoms.map((item) => (
+            {diseaseData.symptoms?.map((item) => (
                 <div><span style={{ fontWeight: 'bold' }}>-</span> {item}</div>
             ))}
         </div>
         <p style={{ fontWeight: 'bold' }}>Remedy</p>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {diseaseData.remedy.map((item) => (
+            {diseaseData.remedy?.map((item) => (
                 <div><span style={{ fontWeight: 'bold' }}>-</span> {item}</div>
             ))}
         </div>
         <p style={{ fontWeight: 'bold' }}>Treatment</p>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {diseaseData.treatment.map((item) => (
+            {diseaseData.treatment?.map((item) => (
                 <div><span style={{ fontWeight: 'bold' }}>-</span> {item}</div>
             ))}
         </div>

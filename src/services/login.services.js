@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.0.102:3000/api";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const LoginServices = {
   login: async (username, password) => {

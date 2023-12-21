@@ -34,7 +34,25 @@ const UpdateDiseaseModal = ({
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const validateFormData = () => {
+    return (
+      formData.diseaseName.trim() === "" ||
+      formData.image.trim() === "" ||
+      formData.description.trim() === "" ||
+      formData.symptoms.trim() === "" ||
+      formData.remedy.trim() === "" ||
+      formData.treatment.trim() === ""
+    );
+  };
+
   const handleSubmit = () => {
+
+    
+    if(validateFormData()) {
+      window.alert("Field with * cannot be empty or null.");
+      return;
+    };
+    
     const symptomsArray = formData.symptoms
       .split(",")
       .map((symptom) => symptom.trim());
@@ -82,10 +100,10 @@ const UpdateDiseaseModal = ({
       }}
     >
       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-        Update Disease
+        Update Disease 
       </h2>
       <label style={{ marginBottom: "15px" }}>
-        Disease Name:
+        Disease Name: <span style={{ fontSize: 16, color: "red" }}>*</span>
         <input
           type="text"
           name="diseaseName"
@@ -102,7 +120,7 @@ const UpdateDiseaseModal = ({
         />
       </label>
       <label style={{ marginBottom: "15px" }}>
-        Image:
+        Image: <span style={{ fontSize: 16, color: "red" }}>*</span>
         <input
           type="text"
           name="image"
@@ -119,7 +137,7 @@ const UpdateDiseaseModal = ({
         />
       </label>
       <label style={{ marginBottom: "15px" }}>
-        Description:
+        Description: <span style={{ fontSize: 16, color: "red" }}>*</span>
         <textarea
           name="description"
           value={formData.description}
@@ -135,7 +153,7 @@ const UpdateDiseaseModal = ({
         />
       </label>
       <label style={{ marginBottom: "15px" }}>
-        Symptoms (comma-separated):
+        Symptoms (comma-separated): <span style={{ fontSize: 16, color: "red" }}>*</span>
         <textarea
           type="text"
           name="symptoms"
@@ -152,7 +170,7 @@ const UpdateDiseaseModal = ({
         />
       </label>
       <label style={{ marginBottom: "15px" }}>
-        Remedy: (comma-separated):
+        Remedy: (comma-separated): <span style={{ fontSize: 16, color: "red" }}>*</span>
         <textarea
           name="remedy"
           value={formData.remedy}
@@ -168,7 +186,7 @@ const UpdateDiseaseModal = ({
         />
       </label>
       <label style={{ marginBottom: "15px" }}>
-        Treatment: (comma-separated):
+        Treatment: (comma-separated): <span style={{ fontSize: 16, color: "red" }}>*</span>
         <textarea
           name="treatment"
           value={formData.treatment}

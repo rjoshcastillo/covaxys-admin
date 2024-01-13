@@ -7,19 +7,19 @@ const os = require('os');
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
+{/* const db = mysql.createConnection({
   host: "localhost",
   user: "skinscan",
   password: "12345678@",
   database: "covaxysdb",
-}); 
+}); */} 
 
-{/* const db = mysql.createConnection({
+const db = mysql.createConnection({
   host: "localhost",
   user: "covaxys",
   password: "@covaxys123",
   database: "covaxysdb",
-}); */}
+}); 
 
 db.connect((error) => {
   if (error) {
